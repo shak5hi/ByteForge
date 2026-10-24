@@ -1,1 +1,24 @@
+# Challenge data (~2.4 GB) - download separately into dataset/
 dataset/
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Generated pipeline outputs (hundreds of MB each)
+output/
+code/business_entity_resolution/outputs/
+code/business_entity_resolution/test_output/
+
+# DuckDB spill / scratch files
+.tmp/
+*.duckdb
+*.duckdb.wal
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
