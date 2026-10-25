@@ -61,7 +61,7 @@ Uses the XGBoost model from the ML Challenge 2026 submission: 16 name and addres
 features (RapidFuzz ratios, Jaro-Winkler, token Jaccard, numeric address overlap, country match)
 and a decision threshold of 0.63 tuned for F0.5 on a validation split grouped by Source 1 entity.
 The validation score is printed by `code/business_entity_resolution/train_model.py` but is not
-recorded in this repository; see `docs/resume_notes.md`.
+recorded in this repository.
 
 Two things to know when reading this model's behaviour in the app:
 - One of its 16 features, `block_name_score`, comes from the competition's blocker. For a single
