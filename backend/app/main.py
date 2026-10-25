@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.config import get_settings
 from app.db import get_session
-from app.routers import places
+from app.routers import places, search
 
 app = FastAPI(
     title="ByteForge Place Search API",
@@ -21,6 +21,7 @@ app.add_middleware(
 )
 
 app.include_router(places.router)
+app.include_router(search.router)
 
 
 @app.get("/health", tags=["meta"])

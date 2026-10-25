@@ -84,3 +84,12 @@ class NearbyResponse(BaseModel):
     radius_km: Optional[float] = None
     count: int
     results: list[PlaceOut]
+
+
+class SearchResponse(BaseModel):
+    query: str
+    reference: Optional[PlaceOut] = None  # the landmark `near` resolved to
+    center: Optional[Point] = None
+    radius_km: Optional[float] = None
+    count: int
+    results: list[PlaceOut]
