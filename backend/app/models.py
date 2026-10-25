@@ -13,6 +13,7 @@ from typing import Any, Optional
 from geoalchemy2 import Geography
 from sqlalchemy import (
     BigInteger,
+    CheckConstraint,
     Boolean,
     DateTime,
     Float,
@@ -58,6 +59,7 @@ class Place(Base):
     sources: Mapped[list["PlaceSource"]] = relationship(back_populates="place", cascade="all, delete-orphan")
 
     __table_args__ = (
+        CheckConstraint("match_confidence BETWEEN 0 AND 1", name="ck_places_match_confidence"),
         Index("ix_places_geom", "geom", postgresql_using="gist"),
         Index("ix_places_name_norm_trgm", "name_norm", postgresql_using="gin",
               postgresql_ops={"name_norm": "gin_trgm_ops"}),
