@@ -8,10 +8,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Optional
 
-from sqlalchemy import Select, func, select
+from sqlalchemy import Select, case, func, select
 from sqlalchemy.orm import Session, selectinload
 
-from app.models import Place
+from app.models import Place, PlaceAlias
+from app.text import normalize
 
 MAX_RADIUS_M = 50_000
 
@@ -83,3 +84,55 @@ def within_radius(
     stmt = _filters(_with_coords(select(Place, dist)), category, landmarks)
     stmt = stmt.where(func.ST_DWithin(Place.geom, here, radius_m)).order_by(dist).limit(limit)
     return [PlaceHit(r.Place, r.lat, r.lon, distance_m=r.distance_m) for r in session.execute(stmt)]
+
+
+LANDMARK_MIN_SCORE = 0.45
+LANDMARK_BONUS = 0.1  # prefer a real landmark over a shop that happens to share its name
+
+
+def resolve_landmark(
+    session: Session,
+    text: str,
+    near: Optional[tuple[float, float]] = None,
+    limit: int = 5,
+) -> list[PlaceHit]:
+    """Places whose name or alias fuzzily matches `text` ("benett univ" -> Bennett University).
+
+    Score = best trigram match over the name and all aliases, using word_similarity so a
+    partial name ("Bennett") still matches the full one. Landmarks get a small bonus; with
+    `near`, ties are broken by distance. Best first; empty if nothing scores above 0.45.
+    """
+    q = normalize(text)
+    if not q:
+        return []
+
+    names = select(Place.id.label("place_id"), Place.name_norm.label("term"))
+    aliases = select(PlaceAlias.place_id, PlaceAlias.alias_norm.label("term"))
+    terms = names.union_all(aliases).subquery()
+
+    term_score = func.greatest(func.similarity(terms.c.term, q), func.word_similarity(q, terms.c.term))
+    best = (
+        select(
+            terms.c.place_id,
+            func.max(term_score).label("score"),
+            func.max(func.similarity(terms.c.term, q)).label("exactness"),  # tie-break: "Pari Chowk" over "Pari Chowk Park"
+        )
+        .where(terms.c.term.op("%>")(q) | terms.c.term.op("%")(q))  # trigram-indexable prefilter
+        .group_by(terms.c.place_id)
+        .subquery()
+    )
+    score = (best.c.score + case((Place.is_landmark, LANDMARK_BONUS), else_=0.0)).label("similarity")
+
+    stmt = _with_coords(select(Place, score).join(best, best.c.place_id == Place.id))
+    stmt = stmt.where(best.c.score >= LANDMARK_MIN_SCORE)
+    order = [score.desc(), best.c.exactness.desc()]
+    if near:
+        dist = func.ST_Distance(Place.geom, point(*near)).label("distance_m")
+        stmt = stmt.add_columns(dist)
+        order.append(dist)
+    stmt = stmt.order_by(*order).limit(limit)
+
+    return [
+        PlaceHit(r.Place, r.lat, r.lon, distance_m=getattr(r, "distance_m", None), similarity=r.similarity)
+        for r in session.execute(stmt)
+    ]
