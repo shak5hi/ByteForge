@@ -79,3 +79,47 @@
 {"q": "lodge near NH 24 Dasna", "tier": "heldout", "name": null, "category": "hotel", "reference": "NH 24 Dasna", "relation": "near", "radius_km": null, "use_user_location": false}
 {"q": "banks in Sector 18 Noida", "tier": "heldout", "name": null, "category": "bank", "reference": "Sector 18 Noida", "relation": "in", "radius_km": null, "use_user_location": false}
 {"q": "gym near Bennett University Gate 2", "tier": "heldout", "name": null, "category": "gym", "reference": "Bennett University Gate 2", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "Bennett University ke paas restaurant", "tier": "hinglish_dev", "name": null, "category": "restaurant", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "mere paas pharmacy", "tier": "hinglish_dev", "name": null, "category": "pharmacy", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "restaurant mere paas", "tier": "hinglish_dev", "name": null, "category": "restaurant", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "Pari Chowk ke paas hotel chahiye", "tier": "hinglish_dev", "name": null, "category": "hotel", "reference": "Pari Chowk", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "mujhe Bennett University ke paas ATM dikhao", "tier": "hinglish_dev", "name": null, "category": "atm", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "dawakhana near me", "tier": "hinglish_dev", "name": null, "category": "pharmacy", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "Alpha 1 ke nazdeek hospital", "tier": "hinglish_dev", "name": null, "category": "hospital", "reference": "Alpha 1", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "sasta hotel Bennett University ke paas", "tier": "hinglish_dev", "name": null, "category": "hotel", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "khana kahan milega Pari Chowk ke paas", "tier": "hinglish_dev", "name": null, "category": "restaurant", "reference": "Pari Chowk", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "rukne ki jagah Bennett University ke paas", "tier": "hinglish_dev", "name": null, "category": "hotel", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "Raja Hotel Bennett University ke paas", "tier": "hinglish_dev", "name": "Raja", "category": "hotel", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "Bennett University se 2 km ke andar restaurant", "tier": "hinglish_dev", "name": null, "category": "restaurant", "reference": "Bennett University", "relation": "within", "radius_km": 2.0, "use_user_location": false}
+{"q": "yahan paas mein petrol pump", "tier": "hinglish_dev", "name": null, "category": "petrol pump", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "nearest ATM", "tier": "hinglish_dev", "name": null, "category": "atm", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "closest pharmacy", "tier": "hinglish_dev", "name": null, "category": "pharmacy", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "Cafe Coffee Day Pari Chowk ke paas", "tier": "hinglish_dev", "name": "Cafe Coffee Day", "category": null, "reference": "Pari Chowk", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "State Bank of India near Alpha 1", "tier": "hinglish_dev", "name": "State Bank of India", "category": null, "reference": "Alpha 1", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "mere aaspaas gym", "tier": "hinglish_dev", "name": null, "category": "gym", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "Alpha 2 ke aaspaas school batao", "tier": "hinglish_dev", "name": null, "category": "school", "reference": "Alpha 2", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "paise nikalne hain Pari Chowk ke paas", "tier": "hinglish_dev", "name": null, "category": "atm", "reference": "Pari Chowk", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "Galgotias University ke paas hotel", "tier": "heldout2", "name": null, "category": "hotel", "reference": "Galgotias University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "mere paas restaurant", "tier": "heldout2", "name": null, "category": "restaurant", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "Knowledge Park ke pass cafe", "tier": "heldout2", "name": null, "category": "cafe", "reference": "Knowledge Park", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "bank mere nazdeek", "tier": "heldout2", "name": null, "category": "bank", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "Sector 62 Noida ke paas hospital dikhao", "tier": "heldout2", "name": null, "category": "hospital", "reference": "Sector 62 Noida", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "supermarket Gaur City ke paas chahiye", "tier": "heldout2", "name": null, "category": "supermarket", "reference": "Gaur City", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "Raja Dhaba Bennett University ke paas", "tier": "heldout2", "name": "Raja", "category": "restaurant", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "Pari Chowk se 1 km ke andar pharmacy", "tier": "heldout2", "name": null, "category": "pharmacy", "reference": "Pari Chowk", "relation": "within", "radius_km": 1.0, "use_user_location": false}
+{"q": "sasta restaurant mere paas", "tier": "heldout2", "name": null, "category": "restaurant", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "gym kahan hai Alpha 1 ke paas", "tier": "heldout2", "name": null, "category": "gym", "reference": "Alpha 1", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "dawai ki dukan Pari Chowk ke paas", "tier": "heldout2", "name": null, "category": "pharmacy", "reference": "Pari Chowk", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "khana mere paas", "tier": "heldout2", "name": null, "category": "restaurant", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "school Alpha 2 ke nazdeek", "tier": "heldout2", "name": null, "category": "school", "reference": "Alpha 2", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "petrol pump nearest", "tier": "heldout2", "name": null, "category": "petrol pump", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "hospital sabse nazdeek", "tier": "heldout2", "name": null, "category": "hospital", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "Apollo Pharmacy mere paas", "tier": "heldout2", "name": "Apollo", "category": "pharmacy", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "closest hotel to Bennett University", "tier": "heldout2", "name": null, "category": "hotel", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "Barista Coffee near Alpha 1", "tier": "heldout2", "name": "Barista", "category": "cafe", "reference": "Alpha 1", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "ATMs within 500 m of me", "tier": "heldout2", "name": null, "category": "atm", "reference": null, "relation": "within", "radius_km": 0.5, "use_user_location": true}
+{"q": "petrol pumps in Greater Noida", "tier": "heldout2", "name": null, "category": "petrol pump", "reference": "Greater Noida", "relation": "in", "radius_km": null, "use_user_location": false}
+{"q": "restaurants close to Pari Chowk metro", "tier": "heldout2", "name": null, "category": "restaurant", "reference": "Pari Chowk metro", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "pharmacy open 24 hours near Alpha 1", "tier": "heldout2", "name": null, "category": "pharmacy", "reference": "Alpha 1", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "Wow Momo near Bennett University", "tier": "heldout2", "name": "Wow Momo", "category": null, "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "hotels in Noida under 3000", "tier": "heldout2", "name": null, "category": "hotel", "reference": "Noida", "relation": "in", "radius_km": null, "use_user_location": false}

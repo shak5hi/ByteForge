@@ -32,21 +32,24 @@ Everything below is reproducible with `pytest` and `python -m ml.evaluation.run_
 
 ### Query parser
 
-Rule-based: regex, a category gazetteer, and edit-distance matching for typos. Scored on
-81 hand-labelled queries, a query counting as correct only if every field matches.
+Rule-based: regex, a category gazetteer, edit-distance matching for typos, and a Hinglish layer that
+rewrites Roman-script Hindi ("Bennett University ke paas restaurant", "mere paas pharmacy") into English
+word order. Scored on 125 hand-labelled queries; a query counts as correct only if every field matches.
 
 | Query set | Queries | Exact match | How it was built |
 |---|---|---|---|
 | Core | 44 | 100% | typical queries; the rules were written against them |
-| Hard | 10 | 100% | weak spots found by the first evaluation (0% before the fixes), so also tuned |
-| Held-out | 27 | **92.6%** (25/27) | written after the fixes, scored once, never tuned on |
+| Hard | 10 | 100% | weak spots from the first evaluation (0% before fixes), so tuned |
+| Held-out (round 1) | 27 | 100% (92.6% when first scored) | two misses were then fixed, so it is now a regression set |
+| Hinglish dev | 20 | 100% (0% before) | the Hinglish rules were tuned on it |
+| Hinglish round 2 | 24 | 100% (29% before) | scored once after the fixes, **but written by the parser's author in the same session, so not truly unseen** |
 
-The held-out row is the honest estimate for unseen queries. It is a small sample written by the
-team, not a public benchmark. Known misses: superlatives like "nearest ATM" (implies "near me")
-and brand names containing a category word, such as "Cafe Coffee Day".
+Honest reading: the only unseen-data number is the round-1 held-out score, 92.6%. The 100% rows are
+tuned or regression sets. A real estimate for Hinglish needs queries written by someone who has not
+seen the rules (for example, your teammate). Small hand-written samples, not a public benchmark.
 
 What it handles: category synonyms and plurals, typos ("restarant"), landmark-first order
-("Bennett University nearby restaurants"), "within 2 km / 1 mile / 500 m", "near me", price and
+("Bennett University nearby restaurants"), "within 2 km / 1 mile / 500 m", "nearest/closest" (implies near me), brand names that contain a category word ("Cafe Coffee Day", "State Bank of India"), "near me", price and
 opening-hours phrases (stripped and reported in `notes`), and phrasing like "where can I eat near X".
 
 ### Ranking

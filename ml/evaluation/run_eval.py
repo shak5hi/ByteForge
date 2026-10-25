@@ -81,8 +81,12 @@ TIER_NOTES = {
     "core": "Typical queries used while writing the parser. Optimistic: the rules were written against them.",
     "hard": "Known weak spots found by the first evaluation (typos, word order, price/hours phrases, "
             "conversational). Fixes were written while looking at these, so this tier is tuned too.",
-    "heldout": "Written afterwards, scored on the first run, never tuned on. The best estimate of how the "
-               "parser does on queries it has not seen. Small sample (see Queries column).",
+    "heldout": "Written after the first fixes and scored once. Later fixes (nearest/ATM, brand names) targeted its "
+               "two misses, so it is now a regression set, not an unseen estimate.",
+    "hinglish_dev": "Hinglish / Indian-style queries the Hinglish rules were tuned on. Optimistic.",
+    "heldout2": "Hinglish and 'nearest' queries scored once after the Hinglish fixes. CAVEAT: written by the same "
+                "author in the same session as the fixes, so it is NOT truly unseen and 100% here is optimistic. "
+                "Real estimate needs queries written by someone else.",
 }
 
 
@@ -101,7 +105,7 @@ def build_report(parser: dict[str, dict], ranking: dict) -> str:
         "| Tier | Queries | All fields correct |",
         "|---|---|---|",
     ]
-    for tier in ("core", "hard", "heldout", "all"):
+    for tier in ("core", "hard", "heldout", "hinglish_dev", "heldout2", "all"):
         if tier in parser:
             r = parser[tier]
             lines.append(f"| {tier} | {r['n']} | {r['exact']} ({pct(r['exact_acc'])}) |")
@@ -143,7 +147,7 @@ def main() -> None:
 
     rows = load_queries()
     parser = {"all": eval_parser(rows)}
-    for tier in ("core", "hard", "heldout"):
+    for tier in ("core", "hard", "heldout", "hinglish_dev", "heldout2"):
         subset = [r for r in rows if r["tier"] == tier]
         if subset:
             parser[tier] = eval_parser(subset)

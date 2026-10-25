@@ -16,14 +16,16 @@ from ml.schemas import ParsedQuery
 
 # canonical -> synonyms (extend from real data)
 CATEGORIES: dict[str, list[str]] = {
-    "restaurant": ["restaurant", "eatery", "dhaba", "food place"],
+    # Hinglish (Roman-script Hindi) synonyms are listed after the English ones.
+    "restaurant": ["restaurant", "eatery", "dhaba", "food place", "khana", "khane ki jagah"],
     "hotel": ["hotel", "lodge", "guest house", "guesthouse", "inn"],
     "cafe": ["cafe", "café", "coffee shop", "coffee"],
-    "hospital": ["hospital", "clinic", "nursing home"],
-    "pharmacy": ["pharmacy", "chemist", "medical store", "medicine shop"],
+    "hospital": ["hospital", "clinic", "nursing home", "aspatal", "haspatal"],
+    "pharmacy": ["pharmacy", "chemist", "medical store", "medicine shop",
+                 "dawakhana", "dawai ki dukan", "dawa ki dukan", "dawai", "dawa"],
     "atm": ["atm", "cash machine"],
     "bank": ["bank"],
-    "school": ["school"],
+    "school": ["school", "vidyalaya"],
     "gym": ["gym", "fitness centre", "fitness center"],
     "supermarket": ["supermarket", "grocery store", "grocery", "kirana"],
     "petrol pump": ["petrol pump", "gas station", "fuel station", "petrol station"],
@@ -56,9 +58,55 @@ _UNIT_KM = {"km": 1.0, "m": 0.001, "mile": 1.609}
 _FILLER_RE = re.compile(
     r"^(?:find me|find|show me|show|search for|search|get me|get|take me to|looking for|"
     r"i am looking for|i'm looking for|i need|i want|list of|best|top|good|cheap|famous|"
-    r"nearest|closest|any|some|an|a|the)\s+",
+    r"nearest|closest|any|some|an|a|the|"
+    r"ek|koi|accha|achha|acha|badhiya|sasta|saste|sasti|sabse)\s+",
     re.I,
 )
+
+# ---- Hinglish (Roman-script Hindi) and "nearest" handling ---------------------------------
+# Hindi puts the landmark first and the postposition after it: "Bennett University ke paas restaurant".
+# We rewrite such queries into the English word order the rest of the parser already handles.
+_HI_NEAR_ME = re.compile(
+    r"\b(?:(?:mere|mera|meri|apne)\s+(?:paas|pass|aas\s?paas|aaspaas|nazdeek|nazdik|najdeek)"
+    r"|(?:yahan|yaha|yahaan|yahin)\s+(?:ke\s+)?(?:paas|pass|aas\s?paas|aaspaas)(?:\s+mein)?)\b",
+    re.I,
+)
+_HI_SUPERLATIVE = re.compile(r"\bsabse\s+(?:paas|pass|nazdeek|nazdik|najdeek)\b", re.I)
+_EN_NEAREST_TO = re.compile(r"^\s*(?:nearest|closest)\s+(?P<item>.+?)\s+to\s+(?P<ref>.+)$", re.I)
+_EN_SUPERLATIVE = re.compile(r"^\s*(?:nearest|closest)\b|\b(?:nearest|closest)\s*$", re.I)
+_HI_REL = re.compile(
+    r"\b(?:ke|ki|k)\s+(?:paas|pass|aas\s?paas|aaspaas|nazdeek|nazdik|najdeek|nazdeeki|qareeb|kareeb)\b", re.I
+)
+_HI_IN = re.compile(r"\bmein\b", re.I)
+_HI_WITHIN = re.compile(
+    r"^(?:(?P<ref>.+?)\s+se\s+)?(?P<n>\d+(?:\.\d+)?)\s*(?P<u>km|kms|kilometers?|kilometres?|meters?|metres?|m)\s+"
+    r"(?:ke\s+)?(?:andar|bheetar|bhitar)\b\s*(?P<rest>.*)$",
+    re.I,
+)
+# Request/politeness words that carry no search meaning.
+_HI_STOP = re.compile(
+    r"\b(?:chahiye|chahiyea|dikhao|dikhaiye|dikhana|batao|bataiye|dhundo|dhoondo|khojo|milega|milegi|"
+    r"kahan|kaha|kidhar|please|pls|plz|bhai|yaar|hai|hain|mujhe|mujhko|mereko)\b",
+    re.I,
+)
+_HI_INTENTS = [
+    (re.compile(
+        r"\b(?:khana\s+(?:kahan|kaha|kidhar)\s+(?:milega|milegi|milta\s+hai|mil\s+sakta\s+hai)"
+        r"|(?:kahan|kaha|kidhar)\s+(?:khayein|khayen|khaye|kha\s+sakte\s+hain?))\b", re.I), "restaurants"),
+    (re.compile(r"\b(?:rukne|ruknay)\s+ki\s+jagah\b|\b(?:kahan|kaha|kidhar)\s+(?:ruk\s+sakte|ruke|rukein)\b", re.I),
+     "hotels"),
+    (re.compile(r"\b(?:paise|paisa|cash)\s+nikal(?:ne|na|ni)(?:\s+hain?)?\b", re.I), "atm"),
+    (re.compile(r"\b(?:dawai|dawa)\s+(?:kahan|kaha)\s+(?:milegi|milti)\b", re.I), "pharmacy"),
+]
+
+# Business names that contain a category word. Without protection "Cafe Coffee Day" would be
+# split into category=cafe + name="Coffee Day".
+_BRANDS = [
+    "cafe coffee day", "coffee day", "state bank of india", "bank of baroda", "bank of india",
+    "union bank of india", "central bank of india",
+]
+_BRAND_RE = re.compile(r"\b(?:" + "|".join(re.escape(b) for b in sorted(_BRANDS, key=len, reverse=True)) + r")\b", re.I)
+_BRAND_TOKEN_RE = re.compile(r"qqbrand(\d+)qq")
 _USER_LOC = {"me", "my location", "here", "my place", "my current location"}
 _USER_LOC_RE = re.compile(r"\b(?:(?:near|around|close to|nearby)\s+(?:me|my\s+(?:current\s+)?(?:location|place))|nearby)\b", re.I)
 
@@ -137,6 +185,72 @@ def _trailing_category(text: str) -> tuple[str | None, str | None, str]:
     return None, None, text
 
 
+def _split_item_landmark(text: str) -> tuple[str, str]:
+    """Hindi word order: 'Raja Hotel Bennett University' -> ('Raja Hotel', 'Bennett University').
+
+    The item is everything up to and including the first category word (or protected brand);
+    whatever follows is the landmark.
+    """
+    text = text.strip()
+    end = 0
+    cat = _CAT_RE.search(text)
+    brand = _BRAND_TOKEN_RE.search(text)
+    if cat:
+        end = cat.end()
+    if brand and (not cat or brand.start() < cat.start()):
+        end = brand.end()
+    return text[:end].strip(), text[end:].strip()
+
+
+def _hinglish_to_english(text: str) -> tuple[str, bool, bool]:
+    """Rewrite Hinglish constructs into English word order.
+
+    Returns (text, near_me, superlative): `near_me` means the query is relative to the user's
+    own location ("mere paas"); `superlative` means 'nearest/closest/sabse paas'.
+    """
+    near_me = superlative = False
+
+    for pattern, word in _HI_INTENTS:
+        text = pattern.sub(word, text)
+
+    m = _EN_NEAREST_TO.match(text)
+    if m:  # "closest hotel to Bennett University" -> "hotel near Bennett University"
+        text = f"{m['item']} near {m['ref']}"
+    elif _EN_SUPERLATIVE.search(text):
+        superlative = True
+        text = _EN_SUPERLATIVE.sub(" ", text)
+    if _HI_SUPERLATIVE.search(text):
+        superlative = True
+        text = _HI_SUPERLATIVE.sub(" ", text)
+    if _HI_NEAR_ME.search(text):
+        near_me = True
+        text = _HI_NEAR_ME.sub(" ", text)
+
+    text = _HI_STOP.sub(" ", text)
+    text = " ".join(text.split())
+
+    m = _HI_WITHIN.match(text)
+    if m:  # "Bennett University se 2 km ke andar restaurant" -> "restaurant within 2 km of Bennett University"
+        ref, rest = (m["ref"] or "").strip(), (m["rest"] or "").strip()
+        if ref and not rest:
+            rest, ref = _split_item_landmark(ref)
+        text = f"{rest} within {m['n']} {m['u']} of {ref or 'me'}"
+        return " ".join(text.split()), near_me, superlative
+
+    for pattern, english in ((_HI_REL, "near"), (_HI_IN, "in")):
+        m = pattern.search(text)
+        if not m:
+            continue
+        left, right = text[: m.start()].strip(), text[m.end():].strip()
+        if right:
+            text = f"{right} {english} {left}"
+        else:
+            item, landmark = _split_item_landmark(left)
+            text = f"{item} {english} {landmark}" if item else f"{english} {left}"
+        break
+    return " ".join(text.split()), near_me, superlative
+
+
 def _clean_front(left: str) -> str:
     left = left.strip()
     while True:
@@ -161,7 +275,18 @@ def parse_query(query: str) -> ParsedQuery:
         text = noise.sub(" ", text)
     for pattern, category_word in _INTENTS:
         text = pattern.sub(category_word, text)
-    text = " ".join(text.split())
+
+    brands: list[str] = []
+
+    def _protect(m: re.Match) -> str:  # hide brand names from category matching
+        brands.append(m.group(0))
+        return f"qqbrand{len(brands) - 1}qq"
+
+    text = _BRAND_RE.sub(_protect, text)
+    text, near_me, superlative = _hinglish_to_english(" ".join(text.split()))
+
+    def _restore(s: str) -> str:
+        return _BRAND_TOKEN_RE.sub(lambda m: brands[int(m.group(1))], s)
 
     radius_m = _WITHIN_RE.search(text)
     if radius_m:
@@ -206,8 +331,14 @@ def parse_query(query: str) -> ParsedQuery:
                 out.ambiguous = True
                 out.notes.append("category taken from the end of the landmark; could be part of its name")
 
-    out.name = name or None
-    out.reference = ref or None
+    out.name = _restore(name) or None
+    out.reference = _restore(ref) or None
+
+    # "mere paas", "nearest ...": relative to the user's own location unless a landmark was given.
+    if (near_me or superlative) and not out.reference:
+        if out.relation == "none":
+            out.relation = "near"
+        out.use_user_location = True
 
     # Confidence + ambiguity notes
     score = 0.0

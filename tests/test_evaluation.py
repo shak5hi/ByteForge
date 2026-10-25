@@ -51,3 +51,23 @@ def test_abu_dhabi_is_not_a_dhaba():
 
     assert parse_location_query("hotels in Abu Dhabi")["category"] == "hotel"
     assert parse_location_query("Abu Dhabi near me")["category"] is None
+
+
+def test_hinglish_dev_regression():
+    rows = [r for r in load_queries() if r["tier"] == "hinglish_dev"]
+    assert eval_parser(rows)["exact"] == len(rows)
+
+
+def test_heldout_and_heldout2_floor():
+    # heldout2 was written by the parser's author, so this is a regression floor, not an unseen estimate.
+    for tier in ("heldout", "heldout2"):
+        rows = [r for r in load_queries() if r["tier"] == tier]
+        assert eval_parser(rows)["exact"] / len(rows) >= 0.90
+
+
+def test_brand_names_and_nearest():
+    from ml.api import parse_location_query as p
+    r = p("Cafe Coffee Day Pari Chowk ke paas")
+    assert r["name"] == "Cafe Coffee Day" and r["category"] is None
+    r = p("nearest ATM")
+    assert r["category"] == "atm" and r["use_user_location"] is True
