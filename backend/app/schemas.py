@@ -44,7 +44,8 @@ class PlaceOut(BaseModel):
             website=p.website,
             match_confidence=p.match_confidence,
             distance_km=None if hit.distance_m is None else round(hit.distance_m / 1000, 3),
-            score=None if hit.similarity is None else round(hit.similarity, 3),
+            # resolve_landmark adds a ranking bonus on top of similarity; clients only see 0-1
+            score=None if hit.similarity is None else round(min(hit.similarity, 1.0), 3),
         )
 
 
