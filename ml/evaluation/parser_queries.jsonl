@@ -52,3 +52,30 @@
 {"q": "hotels near me within 5 km", "tier": "hard", "name": null, "category": "hotel", "reference": null, "relation": "within", "radius_km": 5.0, "use_user_location": true}
 {"q": "where can I eat near Pari Chowk", "tier": "hard", "name": null, "category": "restaurant", "reference": "Pari Chowk", "relation": "near", "radius_km": null, "use_user_location": false}
 {"q": "pharmacy open now near Bennett University", "tier": "hard", "name": null, "category": "pharmacy", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "Pizza Hut near Alpha 2", "tier": "heldout", "name": "Pizza Hut", "category": null, "reference": "Alpha 2", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "restaurants near Pari Chowk metro station", "tier": "heldout", "name": null, "category": "restaurant", "reference": "Pari Chowk metro station", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "i need a hotel near Bennett University", "tier": "heldout", "name": null, "category": "hotel", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "looking for a pharmacy near Gaur City", "tier": "heldout", "name": null, "category": "pharmacy", "reference": "Gaur City", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "nearest ATM", "tier": "heldout", "name": null, "category": "atm", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "hospitals within 5 km of Pari Chowk", "tier": "heldout", "name": null, "category": "hospital", "reference": "Pari Chowk", "relation": "within", "radius_km": 5.0, "use_user_location": false}
+{"q": "Cafe Coffee Day near Knowledge Park", "tier": "heldout", "name": "Cafe Coffee Day", "category": null, "reference": "Knowledge Park", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "Hotel Taj Palace in Mumbai", "tier": "heldout", "name": "Taj Palace", "category": "hotel", "reference": "Mumbai", "relation": "in", "radius_km": null, "use_user_location": false}
+{"q": "bank near Bennett Univ", "tier": "heldout", "name": null, "category": "bank", "reference": "Bennett Univ", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "cheap restaurants in Greater Noida", "tier": "heldout", "name": null, "category": "restaurant", "reference": "Greater Noida", "relation": "in", "radius_km": null, "use_user_location": false}
+{"q": "gyms nearby", "tier": "heldout", "name": null, "category": "gym", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "Sagar Ratna restaurant near Pari Chowk", "tier": "heldout", "name": "Sagar Ratna", "category": "restaurant", "reference": "Pari Chowk", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "hospital near Pari Chowk open 24 hours", "tier": "heldout", "name": null, "category": "hospital", "reference": "Pari Chowk", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "coffee near Alpha 1", "tier": "heldout", "name": null, "category": "cafe", "reference": "Alpha 1", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "petrol pump within 1 km of me", "tier": "heldout", "name": null, "category": "petrol pump", "reference": null, "relation": "within", "radius_km": 1.0, "use_user_location": true}
+{"q": "schools in Sector 150 Noida", "tier": "heldout", "name": null, "category": "school", "reference": "Sector 150 Noida", "relation": "in", "radius_km": null, "use_user_location": false}
+{"q": "Apollo Pharmacy near Bennett University", "tier": "heldout", "name": "Apollo", "category": "pharmacy", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "restaurent near Bennett University", "tier": "heldout", "name": null, "category": "restaurant", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "hotels near Gaur City 2 under 3000", "tier": "heldout", "name": null, "category": "hotel", "reference": "Gaur City 2", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "supermarkets close to me", "tier": "heldout", "name": null, "category": "supermarket", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "Where can I stay near Bennett University", "tier": "heldout", "name": null, "category": "hotel", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "McDonalds", "tier": "heldout", "name": "McDonalds", "category": null, "reference": null, "relation": "none", "radius_km": null, "use_user_location": false}
+{"q": "Sunrise Cafe near me", "tier": "heldout", "name": "Sunrise", "category": "cafe", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "chemist near Alpha 1 metro", "tier": "heldout", "name": null, "category": "pharmacy", "reference": "Alpha 1 metro", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "lodge near NH 24 Dasna", "tier": "heldout", "name": null, "category": "hotel", "reference": "NH 24 Dasna", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "banks in Sector 18 Noida", "tier": "heldout", "name": null, "category": "bank", "reference": "Sector 18 Noida", "relation": "in", "radius_km": null, "use_user_location": false}
+{"q": "gym near Bennett University Gate 2", "tier": "heldout", "name": null, "category": "gym", "reference": "Bennett University Gate 2", "relation": "near", "radius_km": null, "use_user_location": false}
