@@ -10,10 +10,39 @@ React app ──► FastAPI (app/routers) ──► search service (app/search.p
                                               └─ later: ml.api parse_location_query / rank_results
 ```
 
-## Run it locally
+## Run it with Docker (recommended)
 
-Needs Docker and Python 3.11 (the same environment as the ML code, so the ML layer can
-be imported later).
+Needs only Docker. From the repo root:
+
+```bash
+docker compose up -d --build                                  # PostGIS + API; migrations run on start
+docker compose run --rm api python -m scripts.import_osm      # load Greater Noida places (first time)
+```
+
+API: **http://localhost:8000/docs**. The database keeps its data in the `pgdata` volume
+across restarts; `docker compose down -v` wipes it.
+
+| Command | What it does |
+|---|---|
+| `docker compose logs -f api` | Follow API logs |
+| `docker compose up -d --build api` | Rebuild and restart the API after code changes |
+| `docker compose exec db psql -U byteforge` | SQL shell on the database |
+| `docker compose down` | Stop everything (data is kept) |
+
+Settings come from environment variables, with local-dev defaults. To change them, put
+them in a `.env` file in the repo root (it's git-ignored):
+
+```bash
+POSTGRES_USER=byteforge
+POSTGRES_PASSWORD=change-me
+POSTGRES_DB=byteforge
+CORS_ORIGINS=http://localhost:5173,https://your-frontend.example
+```
+
+## Run it without Docker (for development)
+
+Needs Python 3.11 (the same environment as the ML code, so the ML layer can be imported
+later). The database still runs in Docker.
 
 ```bash
 # from the repo root
@@ -98,4 +127,4 @@ Noida is thin (about 240 named places), so expect gaps.
 
 - ML integration: `parse_location_query` in `/search` so a single `q` like
   "hotels near Bennett University" works, and `rank_results` for ordering
-- Automated tests, Docker image for the API, deployment
+- Automated tests and deployment
