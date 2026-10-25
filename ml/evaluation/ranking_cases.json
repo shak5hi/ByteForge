@@ -1,0 +1,104 @@
+[
+  {
+    "id": "R01_same_name_nearest_wins",
+    "query": "Raja Hotel near Bennett University",
+    "ref": [28.4503, 77.5845],
+    "candidates": [
+      {"id": "far", "name": "Raja Hotel", "lat": 28.5500, "lon": 77.7000, "category": "hotel"},
+      {"id": "near", "name": "Raja Hotel", "lat": 28.4510, "lon": 77.5850, "category": "hotel"},
+      {"id": "other", "name": "Sunrise Inn", "lat": 28.4505, "lon": 77.5846, "category": "hotel"}
+    ],
+    "expected_top": "near"
+  },
+  {
+    "id": "R02_named_place_beats_closer_wrong_name",
+    "query": "Raja Hotel near Bennett University",
+    "ref": [28.4503, 77.5845],
+    "candidates": [
+      {"id": "raja_1km", "name": "Raja Hotel", "lat": 28.4590, "lon": 77.5845, "category": "hotel"},
+      {"id": "sunrise_100m", "name": "Sunrise Inn", "lat": 28.4512, "lon": 77.5845, "category": "hotel"}
+    ],
+    "expected_top": "raja_1km"
+  },
+  {
+    "id": "R03_category_beats_nearer_wrong_category",
+    "query": "restaurants near Bennett University",
+    "ref": [28.4503, 77.5845],
+    "candidates": [
+      {"id": "hotel_close", "name": "Grand Palace", "lat": 28.4505, "lon": 77.5846, "category": "hotel"},
+      {"id": "restaurant_1km", "name": "Spice Garden", "lat": 28.4590, "lon": 77.5845, "category": "restaurant"}
+    ],
+    "expected_top": "restaurant_1km"
+  },
+  {
+    "id": "R04_nearest_of_same_category",
+    "query": "cafes near Pari Chowk",
+    "ref": [28.4744, 77.5040],
+    "candidates": [
+      {"id": "c_5km", "name": "Bean There", "lat": 28.5190, "lon": 77.5040, "category": "cafe"},
+      {"id": "c_300m", "name": "Brew Lab", "lat": 28.4771, "lon": 77.5040, "category": "cafe"},
+      {"id": "c_2km", "name": "Daily Grind", "lat": 28.4924, "lon": 77.5040, "category": "cafe"}
+    ],
+    "expected_top": "c_300m"
+  },
+  {
+    "id": "R05_radius_filters_out_far_best_name",
+    "query": "hotels within 1 km of Bennett University",
+    "ref": [28.4503, 77.5845],
+    "candidates": [
+      {"id": "exact_far", "name": "Hotel Royal", "lat": 28.5500, "lon": 77.7000, "category": "hotel"},
+      {"id": "inside", "name": "Lotus Inn", "lat": 28.4520, "lon": 77.5850, "category": "hotel"}
+    ],
+    "expected_top": "inside"
+  },
+  {
+    "id": "R06_confidence_breaks_tie",
+    "query": "Raja Hotel near Bennett University",
+    "ref": [28.4503, 77.5845],
+    "candidates": [
+      {"id": "low_conf", "name": "Raja Hotel", "lat": 28.4510, "lon": 77.5850, "category": "hotel", "match_confidence": 0.3},
+      {"id": "high_conf", "name": "Raja Hotel", "lat": 28.4510, "lon": 77.5850, "category": "hotel", "match_confidence": 0.95}
+    ],
+    "expected_top": "high_conf"
+  },
+  {
+    "id": "R07_typo_in_name_still_found",
+    "query": "Rajaa Hotel near Bennett University",
+    "ref": [28.4503, 77.5845],
+    "candidates": [
+      {"id": "raja", "name": "Raja Hotel", "lat": 28.4530, "lon": 77.5850, "category": "hotel"},
+      {"id": "lotus", "name": "Lotus Inn", "lat": 28.4510, "lon": 77.5850, "category": "hotel"}
+    ],
+    "expected_top": "raja"
+  },
+  {
+    "id": "R08_legal_suffix_ignored",
+    "query": "Sharma Medical Store near Pari Chowk",
+    "ref": [28.4744, 77.5040],
+    "candidates": [
+      {"id": "sharma_pvt", "name": "Sharma Medical Store Pvt Ltd", "lat": 28.4780, "lon": 77.5040, "category": "pharmacy"},
+      {"id": "verma", "name": "Verma Medical Store", "lat": 28.4750, "lon": 77.5040, "category": "pharmacy"}
+    ],
+    "expected_top": "sharma_pvt"
+  },
+  {
+    "id": "R09_category_only_prefers_close_over_far",
+    "query": "ATM near Galgotias University",
+    "ref": [28.3670, 77.5410],
+    "candidates": [
+      {"id": "atm_far", "name": "SBI ATM", "lat": 28.4100, "lon": 77.5410, "category": "atm"},
+      {"id": "atm_near", "name": "HDFC ATM", "lat": 28.3690, "lon": 77.5410, "category": "atm"}
+    ],
+    "expected_top": "atm_near"
+  },
+  {
+    "id": "R10_no_reference_uses_text_and_category",
+    "query": "Raja Hotel",
+    "ref": null,
+    "candidates": [
+      {"id": "wrong", "name": "Sunrise Cafe", "lat": 28.45, "lon": 77.58, "category": "cafe"},
+      {"id": "right", "name": "Raja Hotel", "lat": 28.46, "lon": 77.59, "category": "hotel"}
+    ],
+    "expected_top": "right"
+  }
+]
