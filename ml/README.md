@@ -6,6 +6,7 @@ entity-resolution model from the ML Challenge 2026 submission in `code/business_
 ```
 ml/
 ├── api.py                    # the ONLY module the backend imports
+├── flow.py                   # full search flow (parse -> landmark -> candidates -> rank), database injected
 ├── schemas.py                # Pydantic contracts (ParsedQuery, Place, MatchResult, RankedResult)
 ├── _legacy.py                # loads the competition normalizer/features/model (single source of truth)
 ├── entity_resolution/matcher.py   # single-pair scoring with the trained XGBoost model
@@ -21,7 +22,8 @@ How the pieces connect:
 - `parse_location_query` turns free text into category / name / landmark / relation / radius.
 - `rank_results` orders PostGIS candidates by name match, distance decay, category and match confidence.
 
-Interface details: [`docs/ml_interface.md`](../docs/ml_interface.md).
+Interface details: [`docs/ml_interface.md`](../docs/ml_interface.md). To connect the backend's `/search`,
+see [`docs/ml_integration_guide.md`](../docs/ml_integration_guide.md).
 
 ## Results
 
