@@ -22,3 +22,6 @@ code/business_entity_resolution/test_output/
 Thumbs.db
 .vscode/
 .idea/
+
+# Backend local config
+backend/.env
