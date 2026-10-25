@@ -1,0 +1,54 @@
+{"q": "Raja Hotel near Bennett University", "tier": "core", "name": "Raja", "category": "hotel", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "restaurants near Bennett University", "tier": "core", "name": null, "category": "restaurant", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "cafes within 2 km of Pari Chowk", "tier": "core", "name": null, "category": "cafe", "reference": "Pari Chowk", "relation": "within", "radius_km": 2.0, "use_user_location": false}
+{"q": "pharmacy near me", "tier": "core", "name": null, "category": "pharmacy", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "hotels nearby", "tier": "core", "name": null, "category": "hotel", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "hotels in Greater Noida", "tier": "core", "name": null, "category": "hotel", "reference": "Greater Noida", "relation": "in", "radius_km": null, "use_user_location": false}
+{"q": "ATM near Galgotias University", "tier": "core", "name": null, "category": "atm", "reference": "Galgotias University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "hospital near Alpha 1 Metro Station", "tier": "core", "name": null, "category": "hospital", "reference": "Alpha 1 Metro Station", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "Sharma Medical Store near Pari Chowk", "tier": "core", "name": "Sharma", "category": "pharmacy", "reference": "Pari Chowk", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "best restaurants near Knowledge Park", "tier": "core", "name": null, "category": "restaurant", "reference": "Knowledge Park", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "cheap hotels near Noida Sector 62", "tier": "core", "name": null, "category": "hotel", "reference": "Noida Sector 62", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "coffee shops within 500 m of Bennett University", "tier": "core", "name": null, "category": "cafe", "reference": "Bennett University", "relation": "within", "radius_km": 0.5, "use_user_location": false}
+{"q": "gym near my location", "tier": "core", "name": null, "category": "gym", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "petrol pump near Greater Noida Expressway", "tier": "core", "name": null, "category": "petrol pump", "reference": "Greater Noida Expressway", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "Domino's Pizza near Pari Chowk", "tier": "core", "name": "Domino's Pizza", "category": null, "reference": "Pari Chowk", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "Haldiram's in Connaught Place", "tier": "core", "name": "Haldiram's", "category": null, "reference": "Connaught Place", "relation": "in", "radius_km": null, "use_user_location": false}
+{"q": "banks around Bennett University", "tier": "core", "name": null, "category": "bank", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "schools within 3 km of Alpha 2", "tier": "core", "name": null, "category": "school", "reference": "Alpha 2", "relation": "within", "radius_km": 3.0, "use_user_location": false}
+{"q": "Taj Hotel at Mumbai", "tier": "core", "name": "Taj", "category": "hotel", "reference": "Mumbai", "relation": "at", "radius_km": null, "use_user_location": false}
+{"q": "supermarket near Gaur City", "tier": "core", "name": null, "category": "supermarket", "reference": "Gaur City", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "grocery store close to Bennett University", "tier": "core", "name": null, "category": "supermarket", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "dhaba near NH 24", "tier": "core", "name": null, "category": "restaurant", "reference": "NH 24", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "hotels within 1 mile of Pari Chowk", "tier": "core", "name": null, "category": "hotel", "reference": "Pari Chowk", "relation": "within", "radius_km": 1.609, "use_user_location": false}
+{"q": "pharmacies near me", "tier": "core", "name": null, "category": "pharmacy", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "clinic nearby", "tier": "core", "name": null, "category": "hospital", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "Apollo Hospital near Sector 18", "tier": "core", "name": "Apollo", "category": "hospital", "reference": "Sector 18", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "show me hotels near Bennett University", "tier": "core", "name": null, "category": "hotel", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "find ATM near me", "tier": "core", "name": null, "category": "atm", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "cafes in Knowledge Park 3", "tier": "core", "name": null, "category": "cafe", "reference": "Knowledge Park 3", "relation": "in", "radius_km": null, "use_user_location": false}
+{"q": "Starbucks near Bennett University", "tier": "core", "name": "Starbucks", "category": null, "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "Starbucks Coffee near Pari Chowk", "tier": "core", "name": "Starbucks", "category": "cafe", "reference": "Pari Chowk", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "hotel", "tier": "core", "name": null, "category": "hotel", "reference": null, "relation": "none", "radius_km": null, "use_user_location": false}
+{"q": "Raja Hotel", "tier": "core", "name": "Raja", "category": "hotel", "reference": null, "relation": "none", "radius_km": null, "use_user_location": false}
+{"q": "", "tier": "core", "name": null, "category": null, "reference": null, "relation": "none", "radius_km": null, "use_user_location": false}
+{"q": "restaurants near Bennett University Greater Noida", "tier": "core", "name": null, "category": "restaurant", "reference": "Bennett University Greater Noida", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "gym in Sector 62 Noida", "tier": "core", "name": null, "category": "gym", "reference": "Sector 62 Noida", "relation": "in", "radius_km": null, "use_user_location": false}
+{"q": "bank near Noida City Centre metro", "tier": "core", "name": null, "category": "bank", "reference": "Noida City Centre metro", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "restaurants within 500 meters of Bennett University", "tier": "core", "name": null, "category": "restaurant", "reference": "Bennett University", "relation": "within", "radius_km": 0.5, "use_user_location": false}
+{"q": "hospital close to Pari Chowk", "tier": "core", "name": null, "category": "hospital", "reference": "Pari Chowk", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "Hotel Raja Palace near Bennett University", "tier": "core", "name": "Raja Palace", "category": "hotel", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "McDonald's near Alpha 1 metro", "tier": "core", "name": "McDonald's", "category": null, "reference": "Alpha 1 metro", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "ATMs near Pari Chowk", "tier": "core", "name": null, "category": "atm", "reference": "Pari Chowk", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "school near me", "tier": "core", "name": null, "category": "school", "reference": null, "relation": "near", "radius_km": null, "use_user_location": true}
+{"q": "petrol pumps near Bennett University", "tier": "core", "name": null, "category": "petrol pump", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "Raja Hotal near Bennett University", "tier": "hard", "name": "Raja", "category": "hotel", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "restarant near Bennett University", "tier": "hard", "name": null, "category": "restaurant", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "hospitl near Alpha 1", "tier": "hard", "name": null, "category": "hospital", "reference": "Alpha 1", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "Near Bennett University restaurants", "tier": "hard", "name": null, "category": "restaurant", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "Bennett University nearby restaurants", "tier": "hard", "name": null, "category": "restaurant", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "hotels under 2000 near Bennett University", "tier": "hard", "name": null, "category": "hotel", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "24 hour pharmacy near Alpha 1", "tier": "hard", "name": null, "category": "pharmacy", "reference": "Alpha 1", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "hotels near me within 5 km", "tier": "hard", "name": null, "category": "hotel", "reference": null, "relation": "within", "radius_km": 5.0, "use_user_location": true}
+{"q": "where can I eat near Pari Chowk", "tier": "hard", "name": null, "category": "restaurant", "reference": "Pari Chowk", "relation": "near", "radius_km": null, "use_user_location": false}
+{"q": "pharmacy open now near Bennett University", "tier": "hard", "name": null, "category": "pharmacy", "reference": "Bennett University", "relation": "near", "radius_km": null, "use_user_location": false}

@@ -30,7 +30,10 @@ CATEGORIES: dict[str, list[str]] = {
 _LOOKUP: dict[str, str] = {}
 for canon, syns in CATEGORIES.items():
     for s in syns:
-        for variant in (s, s + "s", s + "es"):
+        variants = [s, s + "s", s + "es"]
+        if s.endswith("y"):  # pharmacy -> pharmacies
+            variants.append(s[:-1] + "ies")
+        for variant in variants:
             _LOOKUP[variant.lower()] = canon
 _CAT_RE = re.compile(
     r"\b(?:" + "|".join(re.escape(v) for v in sorted(_LOOKUP, key=len, reverse=True)) + r")\b",
