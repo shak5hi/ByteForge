@@ -1,20 +1,43 @@
+# Local stack:  docker compose up -d --build
+# Load places:  docker compose run --rm api python -m scripts.import_osm
+#
+# Credentials default to local-dev values; override them in a root .env file
+# (POSTGRES_USER / POSTGRES_PASSWORD / POSTGRES_DB / CORS_ORIGINS) for anything shared.
+
 services:
   db:
     image: postgis/postgis:16-3.4
     container_name: byteforge-db
+    restart: unless-stopped
     environment:
-      POSTGRES_USER: byteforge
-      POSTGRES_PASSWORD: byteforge
-      POSTGRES_DB: byteforge
+      POSTGRES_USER: ${POSTGRES_USER:-byteforge}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-byteforge}
+      POSTGRES_DB: ${POSTGRES_DB:-byteforge}
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U byteforge -d byteforge"]
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 5s
       timeout: 5s
       retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    image: byteforge-api
+    container_name: byteforge-api
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-byteforge}:${POSTGRES_PASSWORD:-byteforge}@db:5432/${POSTGRES_DB:-byteforge}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173}
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
 
 volumes:
   pgdata:
