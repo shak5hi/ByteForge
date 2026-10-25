@@ -162,6 +162,21 @@ missed match, and the classification threshold is tuned with that in mind.
 
 ---
 
+## Place-search ML layer
+
+Beyond the challenge solution, `ml/` adds a natural-language place-search layer for an app
+(query parser, entity matcher, ranker) behind a three-function API in `ml/api.py`.
+See [`ml/README.md`](ml/README.md) for the design and results, and
+[`docs/ml_interface.md`](docs/ml_interface.md) for the backend contract.
+
+```bash
+pip install -r ml/requirements.txt
+pytest                              # 19 tests
+python -m ml.evaluation.run_eval    # parser and ranking evaluation
+```
+
+---
+
 ## Team
 
 | Member | GitHub |
