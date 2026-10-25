@@ -25,3 +25,6 @@ Thumbs.db
 
 # Backend local config
 backend/.env
+
+# Root env file for docker-compose overrides
+.env

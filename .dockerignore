@@ -1,0 +1,28 @@
+# Docker builds use the repo root as context (so the API image can include ml/ later).
+# Keep the ~90 GB of local data and outputs out of it.
+
+# Data and generated outputs
+dataset/
+output/
+.tmp/
+code/business_entity_resolution/outputs/
+code/business_entity_resolution/test_output/
+*.duckdb
+*.duckdb.wal
+
+# Environments, caches, secrets
+.venv/
+venv/
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/node_modules/
+**/.env
+
+# VCS / editor / OS
+.git/
+.gitignore
+.vscode/
+.idea/
+**/.DS_Store
+Thumbs.db
